@@ -1,0 +1,50 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: sprint1-3a
+      author: jhogan
+      comment: We're going to need a state table
+      changes:
+        - createTable:
+            tableName: state
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: char(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+
+  - changeSet:
+      id: sprint1-3b
+      author: jhogan
+      comment: Let's add a few states.
+      rollback: DELETE FROM state
+      changes:
+        - insert:
+            tableName: state
+            columns:
+              - column:
+                  name: code
+                  value: DE
+              - column:
+                  name: name
+                  value: Delaware
+        - insert:
+            tableName: state
+            columns:
+              - column:
+                  name: code
+                  value: VA
+              - column:
+                  name: name
+                  value: Virginia

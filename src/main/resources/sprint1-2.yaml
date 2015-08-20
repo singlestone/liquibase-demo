@@ -1,0 +1,76 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: sprint1-2a
+      author: jhogan
+      comment: Add a few important columns to the person table.
+      changes:
+      - addColumn:
+          tableName: person
+          columns:
+          - column:
+              name: address1
+              type: varchar(40)
+          - column:
+              name: address2
+              type: varchar(40)
+          - column:
+              name: city
+              type: varchar(40)
+          - column:
+              name: postal_code
+              type: varchar(10)
+
+  - changeSet:
+      id: sprint1-2b
+      author: jhogan
+      comment: Let's add Jay and Brian to the person table. We have to create our own rollback because liquibase
+               does not support automatic rollback on insert refactorings.
+      rollback: DELETE FROM person
+      changes:
+        - insert:
+            tableName: person
+            columns:
+                - column:
+                    name: firstname
+                    value: Jay
+                - column:
+                    name: lastname
+                    value: Hogan
+                - column:
+                    name: address1
+                    value: 1234 Main St
+                - column:
+                    name: city
+                    value: Richmond
+                - column:
+                    name: state
+                    value: VA
+                - column:
+                    name: postal_code
+                    value: 23236
+
+        - insert:
+            tableName: person
+            columns:
+                - column:
+                    name: firstname
+                    value: Brian
+                - column:
+                    name: lastname
+                    value: Harvell
+                - column:
+                    name: address1
+                    value: 112 S French Street
+                - column:
+                    name: address2
+                    value: Suite 500
+                - column:
+                    name: city
+                    value: Wilmington
+                - column:
+                    name: state
+                    value: DE
+                - column:
+                    name: postal_code
+                    value: 19801

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: src/main/resources/sprint1-1.yaml
+#  - include:
+#      file: src/main/resources/sprint1-2.yaml
+#  - include:
+#      file: src/main/resources/sprint1-3.yaml
+#  - include:
+#      file: src/main/resources/sprint1-4.yaml

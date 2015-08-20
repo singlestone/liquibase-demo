@@ -1,0 +1,34 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: sprint1-4
+      author: jhogan
+      comment: Now let's change person to use reference states by id
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+            - column:
+                name: state_id
+                type: int
+
+        - sql:
+            sql: UPDATE person p left join state s on p.state = s.code SET p.state_id = s.id;
+
+        - addForeignKeyConstraint:
+            baseColumnNames: state_id
+            baseTableName: person
+            constraintName: fk_state_person
+            referencedColumnNames: id
+            referencedTableName: state
+
+        - dropColumn:
+            tableName: person
+            columnName: state
+
+      rollback:
+        ALTER TABLE person ADD state CHAR(2) NULL;
+        UPDATE person p left join state s on p.state_id = s.id SET p.state = s.code;
+        ALTER TABLE person DROP FOREIGN KEY fk_state_person;
+        ALTER TABLE person DROP INDEX fk_state_person;
+        ALTER TABLE person DROP COLUMN state_id;

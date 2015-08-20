@@ -1,0 +1,38 @@
+Database Migrations with Liquibase Demo
+
+- Changeset 1: A naive person table
+  - Update - mvn liquibase:update
+  - Rollback - mvn liquibase:rollback -Dliquibase.rollbackCount=1
+  - Switch to XML version
+  - Update - mvn liquibase:update
+  - Rollback - mvn liquibase:rollback -Dliquibase.rollbackCount=1
+  - Switch to JSON version
+  - Update - mvn liquibase:update
+  - Rollback - mvn liquibase:rollback -Dliquibase.rollbackCount=1
+  - Switch to SQL version
+  - Update - mvn liquibase:update
+
+- Changeset 2: Let's make this table more realistic
+  - Update
+  - Rollback - mvn liquibase:rollback -Dliquibase.rollbackCount=2
+  - Update
+
+- Changeset 3: Let's make a state table
+  - Update
+
+- Changeset 4: OK, let's do something more complicated.
+  - Update
+  - Rollback
+  - Update
+
+- Run it in test
+  - Update
+
+- Run it in production
+  - dbDoc - mvn liquibase:dbDoc
+  - updateSQL - mvn liquibase:updateSQL
+
+- Drop everything
+  - mvn liquibase:dropAll
+  - mvn liquibase:dropAll -Ptest
+  - mvn liquibase:dropAll -Pproduction
